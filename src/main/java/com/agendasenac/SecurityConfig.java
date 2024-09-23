@@ -11,7 +11,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.stereotype.Component;
 import com.agendasenac.componets.JwtAuthenticationFilter;
 
-@Component
+@Configuration
 public class SecurityConfig {
 
     @Bean
