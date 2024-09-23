@@ -1,7 +1,7 @@
 package com.agendasenac.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.agendasenac.modells.UserSistema;
@@ -11,7 +11,7 @@ import com.agendasenac.repository.UserSistemaRepository;
 public class UserService {
 
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private UserSistemaRepository userRepository;
