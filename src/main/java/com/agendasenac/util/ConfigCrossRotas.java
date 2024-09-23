@@ -17,7 +17,7 @@ public class ConfigCrossRotas {
                         .allowedOrigins("*") // Permite qualquer origem
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH") // Métodos permitidos
                         .allowedHeaders("*") // Permite qualquer cabeçalho
-                        .allowCredentials(true); // Permite envio de credenciais
+                        .allowCredentials(false); // Permite envio de credenciais
             }
         };
     }
