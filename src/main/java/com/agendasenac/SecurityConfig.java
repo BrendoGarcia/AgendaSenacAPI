@@ -8,16 +8,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.stereotype.Component;
-import com.agendasenac.componets.JwtAuthenticationFilter;
+import com.agendasenac.components.JwtAuthenticationFilter;
 
-@Component
+@Configuration
 public class SecurityConfig {
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final UserDetailsService userDetailsService;
@@ -28,25 +22,26 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-            .cors()  // Habilita CORS no Spring Security
-            .and()
-            .csrf(csrf -> csrf.disable())  // Desabilita o CSRF
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/login", "/register/**", "/user/**").permitAll()
-                .requestMatchers("/admin/**").hasAuthority("ADMIN")
-                .requestMatchers("/professor/**").hasAuthority("PROFESSOR")
-                .requestMatchers("/aluno/**").hasAuthority("ALUNO")
-                .requestMatchers("/cordenador/**").hasAuthority("CORDENADOR")
-                .anyRequest().authenticated()
-            )
-            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-            .build();
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .cors()  // Habilita CORS no Spring Security
+            .and()
+            .csrf(csrf -> csrf.disable())  // Desabilita o CSRF
+            .authorizeRequests(auth -> auth
+                .anyRequest().authenticated()
+            )
+            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
     }
 }
