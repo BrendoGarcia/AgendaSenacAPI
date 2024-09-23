@@ -36,15 +36,26 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            .cors()  // Habilita CORS no Spring Security
-            .and()
+         http
+        		
+        	.cors()
+        	.and()
             .csrf(csrf -> csrf.disable())  // Desabilita o CSRF
-            .authorizeRequests(auth -> auth
+            .authorizeHttpRequests(auth -> auth
+                // Endpoints públicos
+                .requestMatchers("/login", "/register", "/user/**").permitAll()
+                // Endpoints protegidos por roles (usando hasAuthority)
+                .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                .requestMatchers("/professor/**").hasAuthority("PROFESSOR")
+                .requestMatchers("/aluno/**").hasAuthority("ALUNO")
+                .requestMatchers("/cordenador/**").hasAuthority("CORDENADOR")
+
+                // Qualquer outra requisição precisa de autenticação
                 .anyRequest().authenticated()
             )
+            // Filtro JWT antes do UsernamePasswordAuthenticationFilter
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
-        return http.build();
+            return http.build();
+         
     }
 }
