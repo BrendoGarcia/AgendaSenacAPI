@@ -3,14 +3,12 @@ package com.agendasenac.controllers;
 import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.ReflectionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.agendasenac.modells.UserSistema;
 import com.agendasenac.repository.UserSistemaRepository;
-import com.agendasenac.services.UserService;
 
 @RestController
 public class UserSistemaController{
@@ -30,9 +27,11 @@ public class UserSistemaController{
 	@Autowired
 	private UserSistemaRepository usp;
 	
-	@Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	
 
 	@GetMapping("/user")
