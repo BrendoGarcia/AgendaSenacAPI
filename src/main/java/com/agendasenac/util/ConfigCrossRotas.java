@@ -14,7 +14,7 @@ public class ConfigCrossRotas {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // Aplica a todos os endpoints
-                        .allowedOriginPatterns("*") // Permite qualquer origem
+                        .allowedOrigins("*") // Permite qualquer origem
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH") // Métodos permitidos
                         .allowedHeaders("*") // Permite qualquer cabeçalho
                         .allowCredentials(true); // Permite envio de credenciais
