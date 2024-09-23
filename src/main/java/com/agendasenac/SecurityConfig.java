@@ -44,12 +44,6 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 // Endpoints públicos
                 .requestMatchers("/login", "/register", "/user/**").permitAll()
-                // Endpoints protegidos por roles (usando hasAuthority)
-                .requestMatchers("/admin/**").hasAuthority("ADMIN")
-                .requestMatchers("/professor/**").hasAuthority("PROFESSOR")
-                .requestMatchers("/aluno/**").hasAuthority("ALUNO")
-                .requestMatchers("/cordenador/**").hasAuthority("CORDENADOR")
-
                 // Qualquer outra requisição precisa de autenticação
                 .anyRequest().authenticated()
             )
