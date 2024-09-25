@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -27,6 +28,12 @@ public class Turma{
 	@Column(name = "DatalhesTurma")
 	private String DatalhesTurma;
 	
+	@Column(name = "Perido")
+	private String Perido;
+	
+	@Column(name = "Ano")
+	private String Ano;
+	
 	@Column(name = "Turno")
 	private String Turno;
 	
@@ -35,6 +42,27 @@ public class Turma{
 	
 	@ManyToMany
 	private List<Disciplinas> disciplinas;
+	
+	public String getPerido() {
+		return Perido;
+	}
+	public void setPerido(String perido) {
+		Perido = perido;
+	}
+	public String getAno() {
+		return Ano;
+	}
+	public void setAno(String ano) {
+		Ano = ano;
+	}
+	public UserSistema getUsersistema() {
+		return usersistema;
+	}
+	public void setUsersistema(UserSistema usersistema) {
+		this.usersistema = usersistema;
+	}
+	@OneToOne
+	private UserSistema usersistema;  //Representante
 	
 
 	public List<Disciplinas> getDisciplinas() {
