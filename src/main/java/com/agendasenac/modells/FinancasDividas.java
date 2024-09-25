@@ -7,7 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -33,7 +33,7 @@ public class FinancasDividas implements Serializable {
 	@Column(name = "statuspagamento")
 	private String statuspagamento;
 	
-	@OneToOne
+	@ManyToOne
 	private UserSistema usersistema;
 
 	public Long getIdtransacao() {
