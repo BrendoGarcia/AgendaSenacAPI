@@ -61,7 +61,7 @@ public class Turma{
 	public void setUsersistema(UserSistema usersistema) {
 		this.repesentante = usersistema;
 	}
-	@OneToOne
+	@OneToOne(optional = true)
 	private UserSistema repesentante;  //Representante
 	
 
