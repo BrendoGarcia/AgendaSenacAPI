@@ -37,6 +37,12 @@ public class Turma{
 	private List<Disciplinas> disciplinas;
 	
 
+	public List<Disciplinas> getDisciplinas() {
+		return disciplinas;
+	}
+	public void setDisciplinas(List<Disciplinas> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
 	public Curso getCurso() {
 		return curso;
 	}
