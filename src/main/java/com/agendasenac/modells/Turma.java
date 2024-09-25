@@ -56,13 +56,13 @@ public class Turma{
 		Ano = ano;
 	}
 	public UserSistema getUsersistema() {
-		return usersistema;
+		return repesentante;
 	}
 	public void setUsersistema(UserSistema usersistema) {
-		this.usersistema = usersistema;
+		this.repesentante = usersistema;
 	}
 	@OneToOne
-	private UserSistema usersistema;  //Representante
+	private UserSistema repesentante;  //Representante
 	
 
 	public List<Disciplinas> getDisciplinas() {
