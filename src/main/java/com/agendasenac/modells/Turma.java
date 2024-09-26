@@ -28,8 +28,8 @@ public class Turma{
 	@Column(name = "DatalhesTurma")
 	private String DatalhesTurma;
 	
-	@Column(name = "Perido")
-	private String Perido;
+	@Column(name = "periodo")
+	private String periodo;
 	
 	@Column(name = "Ano")
 	private String Ano;
@@ -46,11 +46,18 @@ public class Turma{
 	@OneToOne(optional = true)
 	private UserSistema repesentante;  //Representant
 	
-	public String getPerido() {
-		return Perido;
+
+	public String getPeriodo() {
+		return periodo;
 	}
-	public void setPerido(String perido) {
-		Perido = perido;
+	public void setPeriodo(String periodo) {
+		this.periodo = periodo;
+	}
+	public UserSistema getRepesentante() {
+		return repesentante;
+	}
+	public void setRepesentante(UserSistema repesentante) {
+		this.repesentante = repesentante;
 	}
 	public String getAno() {
 		return Ano;
