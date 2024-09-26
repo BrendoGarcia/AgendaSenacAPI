@@ -26,10 +26,8 @@ public class ComunicaDoUser implements Serializable {
 	private Long idComunicado;
 	
 	@Column (name = "DataPublicacao")
-	@JsonProperty("DataPulicacao")
 	private String DataPulicacao;
-	
-	@JsonProperty("ConteudoComunicado")
+
 	@Column (name = "ConteudoComunicado")
 	private String ConteudoComunicado;
 
