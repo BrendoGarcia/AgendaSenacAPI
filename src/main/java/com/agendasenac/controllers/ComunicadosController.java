@@ -3,13 +3,11 @@ package com.agendasenac.controllers;
 import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.ReflectionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.agendasenac.modells.ComunicaDoUser;
-import com.agendasenac.modells.Turma;
 import com.agendasenac.repository.ComunicadosRepository;
 
 @RestController
@@ -79,7 +76,7 @@ public class ComunicadosController {
 	        
 	        updates.forEach((key, value) -> {
 	            try {
-	                Field field = Turma.class.getDeclaredField(key);
+	                Field field = ComunicaDoUser.class.getDeclaredField(key);
 	                field.setAccessible(true);
 	                field.set(comunicador, value);
 	            } catch (NoSuchFieldException e) {
