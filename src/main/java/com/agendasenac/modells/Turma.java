@@ -43,6 +43,9 @@ public class Turma{
 	@ManyToMany
 	private List<Disciplinas> disciplinas;
 	
+	@OneToOne(optional = true)
+	private UserSistema repesentante;  //Representant
+	
 	public String getPerido() {
 		return Perido;
 	}
@@ -61,8 +64,6 @@ public class Turma{
 	public void setUsersistema(UserSistema usersistema) {
 		this.repesentante = usersistema;
 	}
-	@OneToOne(optional = true)
-	private UserSistema repesentante;  //Representante
 	
 
 	public List<Disciplinas> getDisciplinas() {
