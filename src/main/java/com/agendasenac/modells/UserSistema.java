@@ -33,6 +33,15 @@ public class UserSistema implements Serializable {
 	@Column(name = "NomeCompletoUser")
 	private String NomeCompletoUser;
 	
+	@Column(name = "CPF")
+	private String cpfUser;
+	
+	public String getCpfUser() {
+		return cpfUser;
+	}
+	public void setCpfUser(String cpfUser) {
+		this.cpfUser = cpfUser;
+	}
 	@Column(name = "DataNascimentoUser")
 	private String DataNascimentoUser;
 	
