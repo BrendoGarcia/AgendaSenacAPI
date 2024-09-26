@@ -2,6 +2,8 @@ package com.agendasenac.modells;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -16,8 +18,7 @@ import jakarta.persistence.Table;
 @Table (name = "ComunicaDoUser")
 public class ComunicaDoUser implements Serializable {
 	
-	private static final long serialVesionUID = 1L;
-		
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
@@ -25,8 +26,10 @@ public class ComunicaDoUser implements Serializable {
 	private Long idComunicado;
 	
 	@Column (name = "DataPublicacao")
+	@JsonProperty("DataPulicacao")
 	private String DataPulicacao;
 	
+	@JsonProperty("ConteudoComunicado")
 	@Column (name = "ConteudoComunicado")
 	private String ConteudoComunicado;
 
