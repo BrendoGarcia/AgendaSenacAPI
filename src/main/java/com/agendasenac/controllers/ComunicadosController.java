@@ -68,27 +68,34 @@ public class ComunicadosController {
 		}
 	}
 	
+	
 	@PatchMapping("/comunicados/{idComunicado}")
 	@CrossOrigin
-	public ResponseEntity<String> ModificarComunicado(@PathVariable Long idComunicado, @RequestBody Map<String, Object> atualizar) {
-		Optional<ComunicaDoUser> opscomunicador = Optional.ofNullable(cdr.findByIdComunicado(idComunicado));
-		
-		if (opscomunicador.isPresent()) {
-	        ComunicaDoUser comunicador = opscomunicador.get();
+	public ResponseEntity<String> AtualizarComunidados(@PathVariable Long idComunicado, @RequestBody Map<String, Object> updates) {
+	    Optional<ComunicaDoUser> optionalTurma = Optional.ofNullable(cdr.findByIdComunicado(idComunicado));
+	    
+	    if (optionalTurma.isPresent()) {
+	    	ComunicaDoUser comunicador = optionalTurma.get();
 	        
-	        atualizar.forEach((key, value) -> {
-	            Field field = ReflectionUtils.findRequiredField(ComunicaDoUser.class, key);
-	            field.setAccessible(true);
-	            ReflectionUtils.setField(field, comunicador, value);
+	        updates.forEach((key, value) -> {
+	            try {
+	                Field field = Turma.class.getDeclaredField(key);
+	                field.setAccessible(true);
+	                field.set(comunicador, value);
+	            } catch (NoSuchFieldException e) {
+	                // Log de aviso ou mensagem para campo não encontrado
+	                System.out.println("Campo não encontrado: " + key);
+	            } catch (IllegalAccessException e) {
+	                return;
+	            }
 	        });
 	        
 	        cdr.save(comunicador);
-	        return ResponseEntity.status(HttpStatus.OK).body("Comunicado atualizado com sucesso");
-	    }else {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Comunicado não encontrado");
+	        return ResponseEntity.ok("Turma atualizada com sucesso");
+	    } else {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Turma não encontrada");
 	    }
 	}
-	
 
 	
 
