@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.agendasenac.modells.ComunicaDoUser;
+import com.agendasenac.modells.Turma;
 import com.agendasenac.repository.ComunicadosRepository;
 
 @RestController
@@ -56,7 +57,7 @@ public class ComunicadosController {
 		return ResponseEntity.status(HttpStatus.CREATED).body("Comunicado criado com sucesso");
 	}
 
-	@DeleteMapping("/{idComunicado}")
+	@DeleteMapping("/comunicados/{idComunicado}")
 	@CrossOrigin
 	public ResponseEntity<String> DeleteComunicado(@PathVariable Long idComunicado) {
 		if (cdr.existsById(idComunicado)) {
@@ -67,7 +68,7 @@ public class ComunicadosController {
 		}
 	}
 	
-	@PatchMapping("/{idComunicado}")
+	@PatchMapping("/comunicados/{idComunicado}")
 	@CrossOrigin
 	public ResponseEntity<String> ModificarComunicado(@PathVariable Long idComunicado, @RequestBody Map<String, Object> atualizar) {
 		Optional<ComunicaDoUser> opscomunicador = Optional.ofNullable(cdr.findByIdComunicado(idComunicado));
@@ -88,6 +89,7 @@ public class ComunicadosController {
 	    }
 	}
 	
+
 	
 
 }
