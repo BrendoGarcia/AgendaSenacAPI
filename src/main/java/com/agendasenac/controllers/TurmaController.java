@@ -72,25 +72,32 @@ public class TurmaController implements Serializable {
 
 	@PatchMapping("/turma/{idturma}")
 	@CrossOrigin
-	public ResponseEntity<String> AtualizarTurma(@PathVariable Long idturma, @RequestBody Map<String, Object> updates) {
-		
-		Optional<Turma> optionalturma = Optional.ofNullable(tr.findByidturma(idturma));
-		
-		if (optionalturma.isPresent()) {
-			Turma turma = optionalturma.get();
-			
-			updates.forEach((key, value) -> {
-				Field field = ReflectionUtils.findRequiredField(Turma.class, key);
-				field.setAccessible(true);
-	            ReflectionUtils.setField(field, turma, value);
+	public ResponseEntity<String> atualizarTurma(@PathVariable Long idturma, @RequestBody Map<String, Object> updates) {
+	    Optional<Turma> optionalTurma = Optional.ofNullable(tr.findByidturma(idturma));
+	    
+	    if (optionalTurma.isPresent()) {
+	        Turma turma = optionalTurma.get();
+	        
+	        updates.forEach((key, value) -> {
+	            try {
+	                Field field = Turma.class.getDeclaredField(key);
+	                field.setAccessible(true);
+	                field.set(turma, value);
+	            } catch (NoSuchFieldException e) {
+	                // Log de aviso ou mensagem para campo não encontrado
+	                System.out.println("Campo não encontrado: " + key);
+	            } catch (IllegalAccessException e) {
+	                return;
+	            }
 	        });
-			tr.save(turma);
-			return ResponseEntity.status(HttpStatus.OK).body("Turma atualizado com sucesso");
-		}else {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
+	        
+	        tr.save(turma);
+	        return ResponseEntity.ok("Turma atualizada com sucesso");
+	    } else {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Turma não encontrada");
 	    }
-
 	}
+
 	
 	
 	
