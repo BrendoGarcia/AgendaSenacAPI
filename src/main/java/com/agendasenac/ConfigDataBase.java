@@ -15,9 +15,9 @@ public class ConfigDataBase {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://junction.proxy.rlwy.net:49133/railway");
+        dataSource.setUrl("jdbc:postgresql://junction.proxy.rlwy.net:41095/railway");
         dataSource.setUsername("postgres");
-        dataSource.setPassword("WAZcxENwJxzADFbKiwrjQcyPohDYjinP");
+        dataSource.setPassword("xUKAOrLfewRoMfhhLtHYIXnfNqQMmDFA");
         return dataSource;
     }
         
