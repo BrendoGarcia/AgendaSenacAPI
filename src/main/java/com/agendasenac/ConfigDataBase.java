@@ -17,7 +17,7 @@ public class ConfigDataBase {
         dataSource.setDriverClassName("org.postgresql.Driver");
         dataSource.setUrl("jdbc:postgresql://junction.proxy.rlwy.net:56096/railway");
         dataSource.setUsername("postgres");
-        dataSource.setPassword("SMbkLhdgniybdwQgvyFplTuULnhphRyB");
+        dataSource.setPassword("WAZcxENwJxzADFbKiwrjQcyPohDYjinP");
         return dataSource;
     }
         
