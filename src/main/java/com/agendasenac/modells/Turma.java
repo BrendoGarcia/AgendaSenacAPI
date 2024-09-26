@@ -40,8 +40,6 @@ public class Turma{
 	@ManyToOne(optional = true)
 	private Curso curso;
 	
-	@ManyToMany
-	private List<Disciplinas> disciplinas;
 	
 	@OneToOne(optional = true)
 	private UserSistema repesentante;  //Representant
@@ -67,13 +65,7 @@ public class Turma{
 		this.repesentante = usersistema;
 	}
 	
-
-	public List<Disciplinas> getDisciplinas() {
-		return disciplinas;
-	}
-	public void setDisciplinas(List<Disciplinas> disciplinas) {
-		this.disciplinas = disciplinas;
-	}
+	
 	public Curso getCurso() {
 		return curso;
 	}
