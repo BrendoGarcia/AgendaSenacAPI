@@ -22,20 +22,20 @@ public class Turma{
 	@Column(name = "idturma")
 	private Long idturma;
 	
-	@Column(name = "NomeTurma")
-	private String NomeTurma;
+	@Column(name = "nomeTurma")
+	private String nomeTurma;
 	
-	@Column(name = "DatalhesTurma")
-	private String DatalhesTurma;
+	@Column(name = "datalhesTurma")
+	private String datalhesTurma;
 	
 	@Column(name = "periodo")
 	private String periodo;
 	
 	@Column(name = "Ano")
-	private String Ano;
+	private String anno;
 	
-	@Column(name = "Turno")
-	private String Turno;
+	@Column(name = "turno")
+	private String turno;
 	
 	@ManyToOne(optional = true)
 	private Curso curso;
@@ -59,12 +59,7 @@ public class Turma{
 	public void setRepesentante(UserSistema repesentante) {
 		this.repesentante = repesentante;
 	}
-	public String getAno() {
-		return Ano;
-	}
-	public void setAno(String ano) {
-		Ano = ano;
-	}
+
 	public UserSistema getUsersistema() {
 		return repesentante;
 	}
@@ -85,12 +80,7 @@ public class Turma{
 	public void setCurso(Curso curso) {
 		this.curso = curso;
 	}
-	public String getTurno() {
-		return Turno;
-	}
-	public void setTurno(String turno) {
-		Turno = turno;
-	}
+	
 	public void setIdturma(Long idturma) {
 		this.idturma = idturma;
 	}
@@ -98,17 +88,30 @@ public class Turma{
 		return idturma;
 	}
 	public String getNomeTurma() {
-		return NomeTurma;
+		return nomeTurma;
 	}
 	public void setNomeTurma(String nomeTurma) {
-		NomeTurma = nomeTurma;
+		this.nomeTurma = nomeTurma;
 	}
 	public String getDatalhesTurma() {
-		return DatalhesTurma;
+		return datalhesTurma;
 	}
 	public void setDatalhesTurma(String datalhesTurma) {
-		DatalhesTurma = datalhesTurma;
+		this.datalhesTurma = datalhesTurma;
 	}
+	public String getAnno() {
+		return anno;
+	}
+	public void setAnno(String anno) {
+		this.anno = anno;
+	}
+	public String getTurno() {
+		return turno;
+	}
+	public void setTurno(String turno) {
+		this.turno = turno;
+	}
+
 	
 
 }
