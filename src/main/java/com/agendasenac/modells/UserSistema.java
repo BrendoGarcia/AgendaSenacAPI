@@ -21,7 +21,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "UserSistema")
 public class UserSistema implements Serializable {
-
+ 
 
 	private static final long serialVersionUID = 1L;
 	
