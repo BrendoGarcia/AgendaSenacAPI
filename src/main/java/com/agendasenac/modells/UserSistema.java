@@ -93,16 +93,31 @@ public class UserSistema implements Serializable {
 	@ManyToOne(optional = true)
 	private Turma turma;
 	
-	public String getInformacoesTurma() {
-	    if (turma == null) {
-	        return "Sem Turma";
-	    }
-	    String cursoNome = turma.getCurso() != null ? turma.getCurso().getNomecurso() : "Sem Curso";
-	    return String.format("Turma: %s, Turno: %s, Curso: %s", 
-	                          turma.getNomeTurma(), 
-	                          turma.getTurno(), 
-	                          cursoNome);
+	public Long getTurmaId() {
+	    return turma != null ? turma.getIdturma() : null;
 	}
+
+	public String getTurmaNome() {
+	    return turma != null ? turma.getNomeTurma() : null;
+	}
+
+	public String getTurmaTurno() {
+	    return turma != null ? turma.getTurno() : null;
+	}
+
+	public String getTurmaPeriodo() {
+	    return turma != null ? turma.getPeriodo() : null;
+	}
+
+	// Adicione métodos para curso, disciplinas, etc. se necessário
+	public Long getCursoId() {
+	    return turma != null && turma.getCurso() != null ? turma.getCurso().getIdcursos() : null;
+	}
+
+	public String getCursoNome() {
+	    return turma != null && turma.getCurso() != null ? turma.getCurso().getNomecurso() : null;
+	}
+
 	
 	
 	public void setTurma(Turma turma) {
