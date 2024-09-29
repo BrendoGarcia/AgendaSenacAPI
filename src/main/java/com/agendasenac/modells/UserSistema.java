@@ -89,18 +89,22 @@ public class UserSistema implements Serializable {
 		this.numerourgencia = numerourgencia;
 	}
 	
-	@JsonIgnore
+	
 	@ManyToOne(optional = true)
 	private Turma turma;
 	
-	public Long getTurma() {
-		return turma != null ? turma.getIdturma() : null;
+	public String getInformacoesTurma() {
+	    if (turma == null) {
+	        return "Sem Turma";
+	    }
+	    String cursoNome = turma.getCurso() != null ? turma.getCurso().getNomecurso() : "Sem Curso";
+	    return String.format("Turma: %s, Turno: %s, Curso: %s", 
+	                          turma.getNomeTurma(), 
+	                          turma.getTurno(), 
+	                          cursoNome);
 	}
 	
-	 public String getNomeTurma() {
-	        return turma != null ? turma.getNomeTurma() : "Sem Turma"; // Nome da turma
-	    }
-	 
+	
 	public void setTurma(Turma turma) {
 		this.turma = turma;
 	}
