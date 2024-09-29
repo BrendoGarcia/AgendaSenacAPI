@@ -51,11 +51,11 @@ public class Turma{
 		this.periodo = periodo;
 	}
 	public String getNomeRepresetante() {
-        return repesentante != null ? repesentante.getNomeCompletoUser() : null;
+        return repesentante != null ? repesentante.getNomeCompletoUser() : "SEM NOME";
     }
 
     public String getContatoRepresetante() {
-        return repesentante != null ? repesentante.getContatopessoal() : null;
+        return repesentante != null ? repesentante.getContatopessoal() : "SEM CONTATO";
     }
     
     public Long getIddorepressentante() {
