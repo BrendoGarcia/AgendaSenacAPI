@@ -50,12 +50,13 @@ public class Turma{
 	public void setPeriodo(String periodo) {
 		this.periodo = periodo;
 	}
-	public UserSistema getRepesentante() {
-		return repesentante;
-	}
-	public void setRepesentante(UserSistema repesentante) {
-		this.repesentante = repesentante;
-	}
+	public String getNomeRepresetante() {
+        return repesentante != null ? repesentante.getNomeCompletoUser() : null;
+    }
+
+    public String getContatoRepresetante() {
+        return repesentante != null ? repesentante.getContatopessoal() : null;
+    }
 
 	
 	public Curso getCurso() {
