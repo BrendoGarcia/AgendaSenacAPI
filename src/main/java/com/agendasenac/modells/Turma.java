@@ -58,13 +58,6 @@ public class Turma{
 		this.repesentante = repesentante;
 	}
 
-	public UserSistema getUsersistema() {
-		return repesentante;
-	}
-	public void setUsersistema(UserSistema usersistema) {
-		this.repesentante = usersistema;
-	}
-	
 	
 	public Curso getCurso() {
 		return curso;
