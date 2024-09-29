@@ -69,17 +69,7 @@ public class UserSistema implements Serializable {
 	@Column(name = "NumeroParente")
 	private String numerourgencia;
 	
-	@ManyToMany
-	private List<Curso> curso;
 	
-	
-
-	public List<Curso> getCurso() {
-		return curso;
-	}
-	public void setCurso(List<Curso> curso) {
-		this.curso = curso;
-	}
 	public String getContatopessoal() {
 		return contatopessoal;
 	}
