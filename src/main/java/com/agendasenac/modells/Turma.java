@@ -57,6 +57,10 @@ public class Turma{
     public String getContatoRepresetante() {
         return repesentante != null ? repesentante.getContatopessoal() : null;
     }
+    
+    public Long getIddorepressentante() {
+    	return repesentante != null ? repesentante.getCodigo() : null;
+    }
 
 	
 	public Curso getCurso() {
