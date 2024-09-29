@@ -88,12 +88,19 @@ public class UserSistema implements Serializable {
 	public void setNumerourgencia(String numerourgencia) {
 		this.numerourgencia = numerourgencia;
 	}
+	
+	@JsonIgnore
 	@ManyToOne(optional = true)
 	private Turma turma;
 	
-	public Turma getTurma() {
-		return turma;
+	public Long getTurma() {
+		return turma != null ? turma.getIdturma() : null;
 	}
+	
+	 public String getNomeTurma() {
+	        return turma != null ? turma.getNomeTurma() : "Sem Turma"; // Nome da turma
+	    }
+	 
 	public void setTurma(Turma turma) {
 		this.turma = turma;
 	}
