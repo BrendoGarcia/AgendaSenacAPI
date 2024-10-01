@@ -26,7 +26,7 @@ public class ComunicaDoUser implements Serializable {
 	private Long idComunicado;
 
 	@Column(name = "Titulo")
-	private String TituloComunicado;
+	private String tituloComunicado;
 	
 	@Column (name = "DataPublicacao")
 	private String DataPulicacao;
@@ -39,11 +39,11 @@ public class ComunicaDoUser implements Serializable {
 	private UserSistema usersistema;
 
 	public String getTituloComunicado(){
-		return TituloComunicado;
+		return tituloComunicado;
 	}
 
-	public void setTituloComunicado(String TituloComunicado){
-		this.TituloComunicado = TituloComunicado;
+	public void setTituloComunicado(String tituloComunicado){
+		this.tituloComunicado = tituloComunicado;
 	}
 	
 	public UserSistema getUsersistema() {
