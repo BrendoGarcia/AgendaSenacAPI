@@ -38,11 +38,11 @@ public class ComunicaDoUser implements Serializable {
 	@JoinColumn(name = "UserAI")
 	private UserSistema usersistema;
 
-	public getTituloComunicado(){
+	public String getTituloComunicado(){
 		return TituloComunicado;
 	}
 
-	public setTituloComunicado(String TituloComunicado){
+	public void setTituloComunicado(String TituloComunicado){
 		this.TituloComunicado = TituloComunicado;
 	}
 	
