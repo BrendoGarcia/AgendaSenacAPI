@@ -24,6 +24,9 @@ public class ComunicaDoUser implements Serializable {
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	@Column (name = "IdComunicado")
 	private Long idComunicado;
+
+	@Column(name = "Titulo")
+	private String TituloComunicado;
 	
 	@Column (name = "DataPublicacao")
 	private String DataPulicacao;
@@ -35,7 +38,13 @@ public class ComunicaDoUser implements Serializable {
 	@JoinColumn(name = "UserAI")
 	private UserSistema usersistema;
 
-	
+	public getTituloComunicado(){
+		return TituloComunicado;
+	}
+
+	public setTituloComunicado(String TituloComunicado){
+		this.TituloComunicado = TituloComunicado;
+	}
 	
 	public UserSistema getUsersistema() {
 		return usersistema;
