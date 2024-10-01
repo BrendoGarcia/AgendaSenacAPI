@@ -24,6 +24,17 @@ public class Disciplinas implements Serializable{
 	
 	@Column(name = "DetalhesAdicionais")
 	private String DetalhesAdicionais;
+
+	@Column(name = "CargaHoraria")
+	private String = CargaHoraria;
+
+	public String getCargaHoraria(){
+		return CargaHoraria;
+	}
+
+	public setCargaHoraia(String CargaHoraria){
+		this.CargaHoraria = CargaHoraria;
+	}
 	
 	public long getIdDisciplina() {
 		return idDisciplina;
