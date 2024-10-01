@@ -32,7 +32,7 @@ public class Disciplinas implements Serializable{
 		return CargaHoraria;
 	}
 
-	public setCargaHoraia(String CargaHoraria){
+	public void setCargaHoraia(String CargaHoraria){
 		this.CargaHoraria = CargaHoraria;
 	}
 	
