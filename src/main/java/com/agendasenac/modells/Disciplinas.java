@@ -26,7 +26,7 @@ public class Disciplinas implements Serializable{
 	private String DetalhesAdicionais;
 
 	@Column(name = "CargaHoraria")
-	private String = CargaHoraria;
+	private String CargaHoraria;
 
 	public String getCargaHoraria(){
 		return CargaHoraria;
