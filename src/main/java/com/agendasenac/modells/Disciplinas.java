@@ -36,10 +36,6 @@ public class Disciplinas implements Serializable{
 	@ManyToOne(optional = true)
 	private UserSistema professor;
 	
-	
-	public String getprofessor() {
-        return professor != null ? professor.getNomeCompletoUser() : "SEM NOME"; ///pq tu não quer irrr
-    }
 
     public String getcontatoprofessor() {
         return professor != null ? professor.getContatopessoal() : "SEM CONTATO";
@@ -47,6 +43,10 @@ public class Disciplinas implements Serializable{
     
     public Long getprovessorid() {
     	return professor != null ? professor.getCodigo() : null;
+    }
+    
+    public String getprofessor() {
+        return professor != null ? professor.getNomeCompletoUser() : "SEM NOME"; ///pq tu não quer irrr
     }
 
 	public void setProfessor(UserSistema professor) {
