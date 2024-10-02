@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,13 +29,14 @@ public class ComunicadosController {
 	@Autowired
 	private ComunicadosRepository cdr;
 
-
+	@PreAuthorize("hasAnyRole('ADMIN', 'CORDENADOR', 'PROFESSOR', 'ALUNO')")
 	@GetMapping("/comunicados")
 	@CrossOrigin
 	public Iterable<ComunicaDoUser> RetornoComunicados() {
 		return cdr.findAll();
 	}
 
+	@PreAuthorize("hasAnyRole('ADMIN', 'CORDENADOR', 'PROFESSOR', 'ALUNO')")
 	@GetMapping("/{idComunicado}")
 	@CrossOrigin
 	public ResponseEntity<ComunicaDoUser> ReceberComunicadoById(@PathVariable Long idComunicado) {
@@ -46,7 +48,8 @@ public class ComunicadosController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 	}
-
+	
+	@PreAuthorize("hasAnyRole('ADMIN', 'CORDENADOR')")
 	@PostMapping("/comunicados")
 	@CrossOrigin
 	public ResponseEntity<String> CriandoComunicado(@RequestBody ComunicaDoUser comunicadouser) {
@@ -54,6 +57,8 @@ public class ComunicadosController {
 		return ResponseEntity.status(HttpStatus.CREATED).body("Comunicado criado com sucesso");
 	}
 
+	
+	@PreAuthorize("hasAnyRole('ADMIN', 'CORDENADOR')")
 	@DeleteMapping("/comunicados/{idComunicado}")
 	@CrossOrigin
 	public ResponseEntity<String> DeleteComunicado(@PathVariable Long idComunicado) {
@@ -65,7 +70,7 @@ public class ComunicadosController {
 		}
 	}
 	
-	
+	@PreAuthorize("hasAnyRole('ADMIN', 'CORDENADOR')")
 	@PatchMapping("/comunicados/{idComunicado}")
 	@CrossOrigin
 	public ResponseEntity<String> AtualizarComunidados(@PathVariable Long idComunicado, @RequestBody Map<String, Object> updates) {
