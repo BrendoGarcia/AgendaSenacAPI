@@ -51,10 +51,6 @@ public class UserSistema implements Serializable {
 	@Column(name = "imailUser", unique = true)
 	private String imailUser;
 	
-	@OneToMany(mappedBy = "professor")
-	private List<Disciplinas> disciplinas;
-
-	
 	@Column(name = "SenhaAcessoUser")
 	@JsonIgnore
 	private String SenhaAcessoUser;
@@ -71,13 +67,6 @@ public class UserSistema implements Serializable {
 	
 	@Column(name = "NumeroParente")
 	private String numerourgencia;
-	
-	public List<Disciplinas> getDisciplinas() {
-		return disciplinas;
-	}
-	public void setDisciplinas(List<Disciplinas> disciplinas) {
-		this.disciplinas = disciplinas;
-	}
 	
 	public String getContatopessoal() {
 		return contatopessoal;
