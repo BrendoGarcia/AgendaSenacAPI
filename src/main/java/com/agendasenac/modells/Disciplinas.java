@@ -38,7 +38,7 @@ public class Disciplinas implements Serializable{
 	
 	
 	public String getprofessor() {
-        return professor != null ? professor.getNomeCompletoUser() : "SEM NOME";
+        return professor != null ? professor.getNomeCompletoUser() : "SEM NOME"; ///pq tu não quer irrr
     }
 
     public String getcontatoprofessor() {
