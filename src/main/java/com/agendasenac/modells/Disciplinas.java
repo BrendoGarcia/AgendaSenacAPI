@@ -36,10 +36,6 @@ public class Disciplinas implements Serializable{
 	@ManyToOne(optional = true)
 	private UserSistema professor;
 	
-
-    public String getcontatoprofessor() {
-        return professor != null ? professor.getContatopessoal() : "SEM CONTATO";
-    }
     
     public Long getprovessorid() {
     	return professor != null ? professor.getCodigo() : null;
