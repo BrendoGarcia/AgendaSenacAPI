@@ -25,6 +25,10 @@ public class ComunicaDoUser implements Serializable {
 	@Column (name = "IdComunicado")
 	private Long idComunicado;
 
+	@Column(name = "Tipo")
+	private String tipodocomunicado;
+	
+
 	@Column(name = "Titulo")
 	private String tituloComunicado;
 	
@@ -38,6 +42,14 @@ public class ComunicaDoUser implements Serializable {
 	@JoinColumn(name = "UserAI")
 	private UserSistema usersistema;
 
+	public String getTipodocomunicado() {
+		return tipodocomunicado;
+	}
+
+	public void setTipodocomunicado(String tipodocomunicado) {
+		this.tipodocomunicado = tipodocomunicado;
+	}
+	
 	public String getTituloComunicado(){
 		return tituloComunicado;
 	}
