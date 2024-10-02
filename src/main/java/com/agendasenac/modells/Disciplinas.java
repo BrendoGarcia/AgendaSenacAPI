@@ -2,6 +2,8 @@ package com.agendasenac.modells;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,13 +31,23 @@ public class Disciplinas implements Serializable{
 	@Column(name = "CargaHoraria")
 	private String cargaHoraria;
 	
+	
+	@JsonIgnore
 	@ManyToOne(optional = true)
 	private UserSistema professor;
 	
 	
-	public UserSistema getProfessor() {
-		return professor;
-	}
+	public String getprofessor() {
+        return professor != null ? professor.getNomeCompletoUser() : "SEM NOME";
+    }
+
+    public String getcontatoprofessor() {
+        return professor != null ? professor.getContatopessoal() : "SEM CONTATO";
+    }
+    
+    public Long getprovessorid() {
+    	return professor != null ? professor.getCodigo() : null;
+    }
 
 	public void setProfessor(UserSistema professor) {
 		this.professor = professor;
