@@ -13,8 +13,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -51,6 +51,9 @@ public class UserSistema implements Serializable {
 	@Column(name = "imailUser", unique = true)
 	private String imailUser;
 	
+	@OneToMany(mappedBy = "professor")
+	private List<Disciplinas> disciplinas;
+
 	
 	@Column(name = "SenhaAcessoUser")
 	@JsonIgnore
@@ -69,6 +72,12 @@ public class UserSistema implements Serializable {
 	@Column(name = "NumeroParente")
 	private String numerourgencia;
 	
+	public List<Disciplinas> getDisciplinas() {
+		return disciplinas;
+	}
+	public void setDisciplinas(List<Disciplinas> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
 	
 	public String getContatopessoal() {
 		return contatopessoal;

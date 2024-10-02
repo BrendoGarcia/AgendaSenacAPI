@@ -11,6 +11,7 @@ import org.springframework.data.util.ReflectionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,13 +31,14 @@ public class DisciplinasController {
 	@Autowired
 	private DisciplinasRepository dr;
 	
-
+	@PreAuthorize("hasAnyRole('ADMIN', 'CORDENADOR', 'PROFESSOR', 'ALUNO')")
 	@GetMapping("/disciplinas")
 	@CrossOrigin
 	public Iterable<Disciplinas> disiplinas() {
 		return dr.findAll();
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN', 'CORDENADOR', 'PROFESSOR', 'ALUNO')")
 	@GetMapping("/disciplinas/{idDisciplina}")
 	@CrossOrigin
 	public ResponseEntity<Disciplinas> RetornandoUmadiciplina(@PathVariable Long idDisciplina){
@@ -51,7 +53,7 @@ public class DisciplinasController {
 	}
 	
 	
-	
+	@PreAuthorize("hasAnyRole('ADMIN', 'CORDENADOR')")
 	@PostMapping("/disciplinas")
 	@CrossOrigin
 	public ResponseEntity<Map<String, String>> cadastroDisciplinas(@RequestBody Disciplinas disciplinas) {
@@ -64,6 +66,7 @@ public class DisciplinasController {
 
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN', 'CORDENADOR')")
 	@DeleteMapping("/disciplinas/{idDisciplina}")
 	@CrossOrigin
 	public ResponseEntity<Map<String, String>> deletedisciplinas(@PathVariable Long idDisciplina) {
@@ -83,7 +86,7 @@ public class DisciplinasController {
 	}
 
 	
-	
+	@PreAuthorize("hasAnyRole('ADMIN', 'CORDENADOR')")
 	@PatchMapping("/disciplinas/{idDisciplina}")
 	@CrossOrigin
 	public ResponseEntity<Map<String, String>> updateUser(@PathVariable Long idDisciplina, @RequestBody Map<String, Object> updates) {
