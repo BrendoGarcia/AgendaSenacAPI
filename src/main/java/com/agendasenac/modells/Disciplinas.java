@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -27,6 +28,26 @@ public class Disciplinas implements Serializable{
 
 	@Column(name = "CargaHoraria")
 	private String cargaHoraria;
+	
+	@ManyToOne(optional = true)
+	private UserSistema professor;
+	
+	
+	public UserSistema getProfessor() {
+		return professor;
+	}
+
+	public void setProfessor(UserSistema professor) {
+		this.professor = professor;
+	}
+
+	public void setIdDisciplina(Long idDisciplina) {
+		this.idDisciplina = idDisciplina;
+	}
+
+	public void setCargaHoraria(String cargaHoraria) {
+		this.cargaHoraria = cargaHoraria;
+	}
 
 	public String getCargaHoraria(){
 		return cargaHoraria;
