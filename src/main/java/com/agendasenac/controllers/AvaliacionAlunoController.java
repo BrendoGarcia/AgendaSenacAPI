@@ -11,6 +11,7 @@ import org.springframework.data.util.ReflectionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.agendasenac.modells.AvaliandoALuno;
+import com.agendasenac.modells.Disciplinas;
 import com.agendasenac.modells.UserSistema;
 import com.agendasenac.repository.AvaliacionALunoRepository;
 import com.agendasenac.repository.UserSistemaRepository;
@@ -36,12 +38,29 @@ public class AvaliacionAlunoController{
 	@Autowired
 	private UserSistemaRepository userSistemaRepository;
 	
-	
+
 	@GetMapping("/avaliacions")
 	@CrossOrigin
 	public Iterable<AvaliandoALuno> AvaliandoAluno() {
 		return Aar.findAll();
 	}
+	
+	
+	
+@GetMapping("/avaliacions/{idDisciplina}/{codigo}") //tentar pegar os dados de varias disciplina onde o usuaio x tem avalianções
+public ResponseEntity<List<AvaliandoALuno>> Receberavalcoesporuseremdiciplina(@PathVariable Disciplinas idDisciplina, UserSistema codigo) {
+
+		
+	    Optional<List<AvaliandoALuno>> AvalindoUno = Optional.ofNullable(Aar.findBydisciplinaAndaluno(idDisciplina, codigo));
+
+	    if (AvalindoUno.isPresent()) {
+	        return ResponseEntity.ok(AvalindoUno.get());
+	    } else {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	    }
+
+}
+	
 	
 	
 	@GetMapping("/avaliacions/{idavalicacion}/{codigo}")
