@@ -47,6 +47,23 @@ public class AvaliacionAlunoController{
 	
 	
 	
+@GetMapping("/avaliacions/disciplinas/{idDisciplina}/{codigo}")//remover se der erro
+@CrossOrigin
+	public ResponseEntity<List<AvaliandoALuno>> receberAvaliacoesPorUsuarioEmDisciplina(
+	        @PathVariable Long idDisciplina, 
+	        @PathVariable Long codigo) { // 'codigo' aqui é o ID do usuário
+
+	    // Supondo que o 'codigo' representa o ID do UserSistema, você precisa de uma lógica similar à anterior
+	    List<AvaliandoALuno> avaliandoAlunos = Aar.findBydisciplinaAndaluno(idDisciplina, codigo); // Se necessário, construa o objeto UserSistema com o ID.
+
+	    if (avaliandoAlunos != null && !avaliandoAlunos.isEmpty()) {
+	        return ResponseEntity.ok(avaliandoAlunos);
+	    } else {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	    }
+	}
+	
+	
 	
 	@GetMapping("/avaliacions/{idavalicacion}/{codigo}")
 	@CrossOrigin
