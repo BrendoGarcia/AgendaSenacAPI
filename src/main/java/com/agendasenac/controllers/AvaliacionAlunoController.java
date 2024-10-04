@@ -47,21 +47,6 @@ public class AvaliacionAlunoController{
 	
 	
 	
-@GetMapping("/avaliacions/{idDisciplina}/{codigo}") //tentar pegar os dados de varias disciplina onde o usuaio x tem avalianções
-public ResponseEntity<List<AvaliandoALuno>> Receberavalcoesporuseremdiciplina(@PathVariable Disciplinas idDisciplina, UserSistema codigo) {
-
-		
-	    Optional<List<AvaliandoALuno>> AvalindoUno = Optional.ofNullable(Aar.findBydisciplinaAndaluno(idDisciplina, codigo));
-
-	    if (AvalindoUno.isPresent()) {
-	        return ResponseEntity.ok(AvalindoUno.get());
-	    } else {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-	    }
-
-}
-	
-	
 	
 	@GetMapping("/avaliacions/{idavalicacion}/{codigo}")
 	@CrossOrigin
