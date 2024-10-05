@@ -36,7 +36,7 @@ public class LoginController {
 
             // Encontra o usuário no banco de dados usando Optional
             Optional<UserSistema> optionalUsuario = usersistema.findByImailUserAndSenhaAcessoUser(authRequest.getUserEmail(), authRequest.getUserSenha());
-
+System.out.println(authRequest.getUserEmail() + authRequest.getUserSenha());
             // Cria o mapa de resposta
             Map<String, Object> response = new HashMap<>();
             response.put("Token", token);
