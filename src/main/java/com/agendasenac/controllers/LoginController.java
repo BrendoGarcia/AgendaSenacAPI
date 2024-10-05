@@ -1,5 +1,3 @@
-package com.agendasenac.controllers;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -34,9 +32,9 @@ public class LoginController {
             // Autentica o usuário e gera o token
             String token = authenticationService.authenticate(authRequest.getUserEmail(), authRequest.getUserSenha());
 
-            // Encontra o usuário no banco de dados usando Optional
-            Optional<UserSistema> optionalUsuario = usersistema.findByImailUserAndSenhaAcessoUser(authRequest.getUserEmail(), authRequest.getUserSenha());
-System.out.println(authRequest.getUserEmail() + authRequest.getUserSenha());
+            // Busca o usuário no banco de dados apenas pelo e-mail, já que a senha foi verificada
+            Optional<UserSistema> optionalUsuario = usersistema.findByimailUser(authRequest.getUserEmail());
+
             // Cria o mapa de resposta
             Map<String, Object> response = new HashMap<>();
             response.put("Token", token);
