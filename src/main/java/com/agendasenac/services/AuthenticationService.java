@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+import com.agendasenac.modells.UserSistema;
 import com.agendasenac.util.JwtUtil;
 
 @Service
@@ -28,6 +29,7 @@ public class AuthenticationService {
             new UsernamePasswordAuthenticationToken(email, senha)
         );
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        return jwtUtil.generateToken(userDetails);
+        UserSistema user = (UserSistema) authentication.getPrincipal();
+        return jwtUtil.generateToken(userDetails, user);
     }
 }
