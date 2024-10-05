@@ -52,6 +52,8 @@ public class JwtUtil {
             claims.put("Email", user.getImailUser());
             claims.put("Nome", user.getNomeCompletoUser());
             claims.put("Tipo", user.getTipoUser());
+            
+            System.out.println(user.getTipoUser());
         }
         
         
