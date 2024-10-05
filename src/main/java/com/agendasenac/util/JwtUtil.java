@@ -43,21 +43,18 @@ public class JwtUtil {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(UserDetails userDetails, UserSistema user ) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("role", userDetails.getAuthorities());
-        	UserSistema user = new UserSistema();
+        	claims.put("role", userDetails.getAuthorities());
             claims.put("Email", user.getImailUser());
             claims.put("Nome", user.getNomeCompletoUser());
             claims.put("Tipo", user.getTipoUser());
-        
-
+    
         return createToken(claims, userDetails.getUsername());
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
         return Jwts.builder()
-        		.addClaims(claims)
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
