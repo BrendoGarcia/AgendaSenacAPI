@@ -1,19 +1,21 @@
 package com.agendasenac.util;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
-
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
 import javax.crypto.SecretKey;
+
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
+
+import com.agendasenac.modells.UserSistema;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JwtUtil {
@@ -44,6 +46,15 @@ public class JwtUtil {
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", userDetails.getAuthorities());
+   
+        if (userDetails instanceof UserSistema) {
+        	UserSistema user = (UserSistema) userDetails;
+            claims.put("Email", user.getImailUser());
+            claims.put("Nome", user.getNomeCompletoUser());
+            claims.put("Tipo", user.getTipoUser());
+        }
+        
+        
         return createToken(claims, userDetails.getUsername());
     }
 
