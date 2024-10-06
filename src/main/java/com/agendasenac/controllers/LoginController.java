@@ -2,52 +2,58 @@ package com.agendasenac.controllers;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.agendasenac.modells.JwtResponse;
 import com.agendasenac.modells.LoginRequest;
+import com.agendasenac.modells.UserSistema;
+import com.agendasenac.repository.UserSistemaRepository;
 import com.agendasenac.services.AuthenticationService;
-import com.agendasenac.util.CodigoUtilRapido;
 
 @RestController
 public class LoginController {
-	
-	@Autowired
+
+    @Autowired
     private AuthenticationService authenticationService;
-	
-	
-	@PostMapping("/login")
-	@CrossOrigin
-	public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest authRequest) {
-	        try {
-	            // Autentica o usuário e gera o token
-	            String token = authenticationService.authenticate(authRequest.getUserEmail(), authRequest.getUserSenha());
-	            
-	            Map<String, String> response = new HashMap<>();
-		        response.put("Token ",  token);
-	            
-	            return ResponseEntity.ok(response);
-	        } catch (AuthenticationException e) {
-	            // Se houver erro de autenticação, retorne 401 Unauthorized
-	        	Map<String, String> response = new HashMap<>();
-		        response.put("Aceso ",  "Negado");
-	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
-	        }
-	}
 
-		
-		
-		
+    @Autowired
+    private UserSistemaRepository usersistema;
 
+    @PostMapping("/login")
+    @CrossOrigin
+    public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest authRequest) {
+        try {
+            // Autentica o usuário e gera o token
+            String token = authenticationService.authenticate(authRequest.getUserEmail(), authRequest.getUserSenha());
+
+            Optional<UserSistema> optionalUsuario = usersistema.findByimailUser(authRequest.getUserEmail());
+
+            Map<String, String> response = new HashMap<>();
+            response.put("Token", token);
+
+            if (optionalUsuario.isPresent()) {
+                UserSistema usuario = optionalUsuario.get(); // Obtém o usuário do Optional
+                // Cria uma string com os dados do usuário que você deseja retornar
+                String dadosUser = "Nome: " + usuario.getNomeCompletoUser() + ", Tipo: " + usuario.getTipoUser();
+                response.put("DadosUser", dadosUser); // Coloca a string no mapa
+            } else {
+                response.put("DadosUser", "Usuário não encontrado"); // Mensagem se não encontrar
+            }
+
+            return ResponseEntity.ok(response);
+        } catch (AuthenticationException e) {
+            // Se houver erro de autenticação, retorne 401 Unauthorized
+            Map<String, String> response = new HashMap<>();
+            response.put("Acesso", "Negado");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+        }
+    }
 }
