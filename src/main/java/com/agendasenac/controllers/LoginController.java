@@ -45,7 +45,8 @@ public class LoginController {
                 // Cria uma string com os dados do usuário que você deseja retornar
                 String Nome = usuario.getNomeCompletoUser();
                 RegraUsers Tipo = usuario.getTipoUser();
-                response.put("DadosUser", Nome + Tipo ); // Coloca a string no mapa
+                response.put("NomeUsuario", Nome + Tipo); 
+                response.put("TipoUser" + Tipo, "");
             } else {
                 response.put("DadosUser", "Usuário não encontrado"); // Mensagem se não encontrar
             }
