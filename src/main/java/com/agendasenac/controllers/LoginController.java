@@ -17,6 +17,7 @@ import com.agendasenac.modells.LoginRequest;
 import com.agendasenac.modells.UserSistema;
 import com.agendasenac.repository.UserSistemaRepository;
 import com.agendasenac.services.AuthenticationService;
+import com.agendasenac.services.RegraUsers;
 
 @RestController
 public class LoginController {
@@ -42,8 +43,9 @@ public class LoginController {
             if (optionalUsuario.isPresent()) {
                 UserSistema usuario = optionalUsuario.get(); // Obtém o usuário do Optional
                 // Cria uma string com os dados do usuário que você deseja retornar
-                String dadosUser = "Nome: " + usuario.getNomeCompletoUser() + ", Tipo: " + usuario.getTipoUser();
-                response.put("DadosUser", dadosUser); // Coloca a string no mapa
+                String Nome = usuario.getNomeCompletoUser();
+                RegraUsers Tipo = usuario.getTipoUser();
+                response.put("DadosUser", Nome + Tipo ); // Coloca a string no mapa
             } else {
                 response.put("DadosUser", "Usuário não encontrado"); // Mensagem se não encontrar
             }
