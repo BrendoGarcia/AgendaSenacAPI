@@ -106,7 +106,7 @@ public class DisciplinasController {
 	        });
 	        
 	        dr.save(disciplinas);
-	        return ResponseEntity.ok("Turma atualizada com sucesso");
+	        return ResponseEntity.ok("Disciplina atualizada com sucesso");
 	    } else {
 	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Disciplina não encontrada");
 	    }
