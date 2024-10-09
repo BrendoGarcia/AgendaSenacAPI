@@ -44,6 +44,14 @@ public class Disciplinas implements Serializable{
         return turma != null ? turma.getNomeTurma() : "SEM NOME"; ///pq tu não quer irrr
     }
 	
+	public Curso getnomeTurmacursp() {
+        return turma != null ? turma.getCurso() : null; ///pq tu não quer irrr
+    }
+	
+	public String getano() {
+        return turma != null ? turma.getAnno() : "SEM Ano"; ///pq tu não quer irrr
+    }
+	
 	public Long getidturma() {
         return turma != null ? turma.getIdturma() : null; ///pq tu não quer irrr
     }
