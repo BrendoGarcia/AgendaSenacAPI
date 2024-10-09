@@ -8,5 +8,5 @@ import com.agendasenac.modells.Disciplinas;
 
 public interface DisciplinasRepository extends CrudRepository<Disciplinas, Long>{
 			Disciplinas findByidDisciplina(Long idDisciplina);
-			List<Disciplinas> findBycodigo(Long codigo);
+			List<Disciplinas> findBycodigo(Long professor);
 }			
