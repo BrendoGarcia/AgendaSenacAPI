@@ -45,25 +45,15 @@ public class AvaliandoALuno implements Serializable{
 		this.idavalicacion = idavalicacion;
 	}
 
-	///
+	//
 	
-	public String getnomeAluno() {
-        return aluno != null ? aluno.getNomeCompletoUser() : "SEM NOME"; ///pq tu não quer irrr
-    }
+	public UserSistema getAluno() {
+		return aluno;
+	}
 	
-	public Long getidaLuno() {
-        return aluno != null ? aluno.getCodigo() : null; ///pq tu não quer irrr
-    }
-	
-	
-	public Long getidprofessor() {
-        return Professor != null ? Professor.getCodigo() : null; ///pq tu não quer irrr
-    }
-	
-	public String getnomer() {
-        return Professor != null ? Professor.getNomeCompletoUser() : null; ///pq tu não quer irrr
-    }
-	
+	public UserSistema getProfessor() {
+		return Professor;
+	}
 
 	//
 	public void setAluno(UserSistema aluno) {
