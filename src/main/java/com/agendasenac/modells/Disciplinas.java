@@ -44,7 +44,7 @@ public class Disciplinas implements Serializable{
         return turma != null ? turma.getNomeTurma() : "SEM NOME"; ///pq tu não quer irrr
     }
 	
-	public Curso getnomeTurmacursp() {
+	public Curso getCurso() {
         return turma != null ? turma.getCurso() : null; ///pq tu não quer irrr
     }
 	
