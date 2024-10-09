@@ -32,11 +32,11 @@ public class Disciplinas implements Serializable{
 	private String cargaHoraria;
 	
 	
-	@JsonIgnore
+
 	@ManyToOne(optional = true)
 	private UserSistema professor;
 	
-	@JsonIgnore
+
 	@ManyToOne(optional = true)
 	private Turma turma;
 	
@@ -60,19 +60,14 @@ public class Disciplinas implements Serializable{
     	return professor != null ? professor.getCodigo() : null;
     }
 	
+  
 
-	public Turma getTurma() {
-		return turma;
-	}
+	
 
 	public void setTurma(Turma turma) {
 		this.turma = turma;
 	}
-
-	public UserSistema getProfessor() {
-		return professor;
-	}
-
+	
 	public void setProfessor(UserSistema professor) {
 		this.professor = professor;
 	}
