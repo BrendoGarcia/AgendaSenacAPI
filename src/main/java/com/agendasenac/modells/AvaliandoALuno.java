@@ -21,6 +21,39 @@ public class AvaliandoALuno implements Serializable{
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private Long idavalicacion;
 	
+	@JoinColumn(name = "unidade")
+	private String unidade;
+	
+	@JoinColumn(name = "ordemlancameneto")
+	private String ordemlancameneto;
+	
+	public String getUnidade() {
+		return unidade;
+	}
+
+	public void setUnidade(String unidade) {
+		this.unidade = unidade;
+	}
+
+	public String getOrdemlancameneto() {
+		return ordemlancameneto;
+	}
+
+	public void setOrdemlancameneto(String ordemlancameneto) {
+		this.ordemlancameneto = ordemlancameneto;
+	}
+
+	public String getDataavalicion() {
+		return dataavalicion;
+	}
+
+	public void setDataavalicion(String dataavalicion) {
+		this.dataavalicion = dataavalicion;
+	}
+
+	@JoinColumn(name = "dataavalicion")
+	private String dataavalicion;
+	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "idaluno")
 	private UserSistema aluno;
