@@ -2,6 +2,7 @@ package com.agendasenac.controllers;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -50,6 +51,20 @@ public class DisciplinasController {
 	        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 	    }
 		
+	}
+	
+	
+	
+	@GetMapping("/disciplinas/{codigo}")
+	@CrossOrigin
+	public ResponseEntity<List<Disciplinas>> RetornandoAsDisciplinasProfessor(@PathVariable Long codigo) {
+	    List<Disciplinas> disciplinas = dr.findByProfessorCodigo(codigo);
+	    
+	    if (!disciplinas.isEmpty()) {
+	        return ResponseEntity.ok(disciplinas);
+	    } else {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	    }
 	}
 	
 	
