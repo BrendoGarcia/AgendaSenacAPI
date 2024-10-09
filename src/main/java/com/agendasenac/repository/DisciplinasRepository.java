@@ -10,4 +10,5 @@ public interface DisciplinasRepository extends CrudRepository<Disciplinas, Long>
 			Disciplinas findByidDisciplina(Long idDisciplina);
 			List<Disciplinas> findByProfessorCodigo(Long codigo);
 			List<Disciplinas> findByProfessorCodigoTurma(Long codigo, Long idturma);
+			
 }			

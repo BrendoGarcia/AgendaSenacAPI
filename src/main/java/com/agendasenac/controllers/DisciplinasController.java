@@ -70,7 +70,9 @@ public class DisciplinasController {
 	
 	@GetMapping("/disciplinas/professor/{codigo}/{idturma}")
 	@CrossOrigin
-	public ResponseEntity<List<Disciplinas>> RetornandoAsDisciplinasProfessorTurma(@PathVariable Long codigo, Long idturma) {
+	public ResponseEntity<List<Disciplinas>> RetornandoAsDisciplinasProfessorTurma(
+	        @PathVariable Long codigo,
+	        @PathVariable Long idturma) {
 	    List<Disciplinas> disciplinas = dr.findByProfessorCodigoTurma(codigo, idturma);
 	    
 	    if (!disciplinas.isEmpty()) {
