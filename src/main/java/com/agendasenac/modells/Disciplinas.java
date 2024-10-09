@@ -32,46 +32,32 @@ public class Disciplinas implements Serializable{
 	private String cargaHoraria;
 	
 	
-	@JsonIgnore
-	@ManyToOne(optional = true)
-	private UserSistema professor;
-	
-	@JsonIgnore
-	@ManyToOne(optional = true)
-	private Turma turma;
-	
 
-	public void setTurma(Turma turma) {
-		this.turma = turma;
+	public UserSistema getProfessor() {
+		return professor;
 	}
-
-	public String getnomeTurma() {
-        return turma != null ? turma.getNomeTurma() : "SEM NOME"; ///pq tu não quer irrr
-    }
-	
-	public Long getidturma() {
-        return turma != null ? turma.getIdturma() : null; ///pq tu não quer irrr
-    }
-	
-	public String getnomeprofessor() {
-        return professor != null ? professor.getNomeCompletoUser() : "SEM NOME"; ///pq tu não quer irrr
-    }
-
-    public String getcontatoprofessor() {
-        return professor != null ? professor.getContatopessoal() : "SEM CONTATO";
-    }
-    
-    public Long getprovessorid() {
-    	return professor != null ? professor.getCodigo() : null;
-    }
 
 	public void setProfessor(UserSistema professor) {
 		this.professor = professor;
 	}
 
+	public Turma getTurma() {
+		return turma;
+	}
+
+	public void setTurma(Turma turma) {
+		this.turma = turma;
+	}
+
 	public void setIdDisciplina(Long idDisciplina) {
 		this.idDisciplina = idDisciplina;
 	}
+	@ManyToOne(optional = true)
+	private UserSistema professor;
+	
+	@ManyToOne(optional = true)
+	private Turma turma;
+	
 
 	public void setCargaHoraria(String cargaHoraria) {
 		this.cargaHoraria = cargaHoraria;
