@@ -68,6 +68,19 @@ public class DisciplinasController {
 	}
 	
 	
+	@GetMapping("/disciplinas/professor/{codigo}/{idturma}")
+	@CrossOrigin
+	public ResponseEntity<List<Disciplinas>> RetornandoAsDisciplinasProfessorTurma(@PathVariable Long codigo, Long idturma) {
+	    List<Disciplinas> disciplinas = dr.findByProfessorCodigoTurma(codigo, idturma);
+	    
+	    if (!disciplinas.isEmpty()) {
+	        return ResponseEntity.ok(disciplinas);
+	    } else {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	    }
+	}
+	
+	
 	@PostMapping("/disciplinas")
 	@CrossOrigin
 	public ResponseEntity<Map<String, String>> cadastroDisciplinas(@RequestBody Disciplinas disciplinas) {
