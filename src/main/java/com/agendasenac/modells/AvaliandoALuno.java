@@ -51,7 +51,7 @@ public class AvaliandoALuno implements Serializable{
         return aluno != null ? aluno.getNomeCompletoUser() : "SEM NOME"; ///pq tu não quer irrr
     }
 	
-	public Long getidALuno() {
+	public Long getidaLuno() {
         return aluno != null ? aluno.getCodigo() : null; ///pq tu não quer irrr
     }
 	
