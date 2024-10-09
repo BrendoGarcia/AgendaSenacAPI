@@ -40,7 +40,7 @@ public class DisciplinasController {
 	}
 	
 
-	@GetMapping("/disciplinas/professor/{idDisciplina}")
+	@GetMapping("/disciplinas/{idDisciplina}")
 	@CrossOrigin
 	public ResponseEntity<Disciplinas> RetornandoUmadiciplina(@PathVariable Long idDisciplina){
 		Optional<Disciplinas> disiciplias = Optional.ofNullable(dr.findByidDisciplina(idDisciplina));
@@ -55,7 +55,7 @@ public class DisciplinasController {
 	
 	
 	
-	@GetMapping("/disciplinas/{codigo}")
+	@GetMapping("/disciplinas/professor/{codigo}")
 	@CrossOrigin
 	public ResponseEntity<List<Disciplinas>> RetornandoAsDisciplinasProfessor(@PathVariable Long codigo) {
 	    List<Disciplinas> disciplinas = dr.findByProfessorCodigo(codigo);
