@@ -8,6 +8,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -48,7 +50,8 @@ public class AvaliandoALuno implements Serializable{
 	}
 
 	public void setDataavalicion(String dataavalicion) {
-		this.dataavalicion = dataavalicion;
+		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		 this.dataavalicion = LocalDateTime.now().format(formatter);
 	}
 
 	@JoinColumn(name = "dataavalicion")
