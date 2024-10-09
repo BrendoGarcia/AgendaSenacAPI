@@ -11,7 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
+ 
 @Entity
 @Table(name = "Disciplinas")
 public class Disciplinas implements Serializable{
@@ -36,6 +36,18 @@ public class Disciplinas implements Serializable{
 	@ManyToOne(optional = true)
 	private UserSistema professor;
 	
+	@JsonIgnore
+	@ManyToOne(optional = true)
+	private Turma turma;
+	
+	
+	public String getnomeTurma() {
+        return turma != null ? turma.getNomeTurma() : "SEM NOME"; ///pq tu não quer irrr
+    }
+	
+	public Long getidturma() {
+        return turma != null ? turma.getIdturma() : null; ///pq tu não quer irrr
+    }
 	
 	public String getnomeprofessor() {
         return professor != null ? professor.getNomeCompletoUser() : "SEM NOME"; ///pq tu não quer irrr

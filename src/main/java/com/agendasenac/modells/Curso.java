@@ -28,16 +28,7 @@ public class Curso implements Serializable{
 	@Column(name = "datalhescurso")
 	private String datalhescurso;
 	
-	@ManyToMany
-	private List<Disciplinas> disciplinas;
 
-	public List<Disciplinas> getDisciplinas() {
-		return disciplinas;
-	}
-
-	public void setDisciplinas(List<Disciplinas> disciplinas) {
-		this.disciplinas = disciplinas;
-	}
 
 	public Long getIdcursos() {
 		return idcursos;
