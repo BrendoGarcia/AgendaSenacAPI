@@ -49,15 +49,15 @@ public class AvaliacionAlunoController{
 	@GetMapping("/avaliacions/todas/{codigo}")
 	@CrossOrigin
 	public ResponseEntity<List<AvaliandoALuno>> getAvaliacoesPorAluno(@PathVariable Long codigo) {
-	    
-	    List<AvaliandoALuno> avaliacoes = Aar.findByAluno(codigo);
+
+	    List<AvaliandoALuno> avaliacoes = Aar.findByAluno_Id(codigo);
 
 	    if (!avaliacoes.isEmpty()) {
 	        return ResponseEntity.ok(avaliacoes);
 	    } else {
 	        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 	    }
-}
+	}
 	
 	
 	
