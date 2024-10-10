@@ -66,6 +66,22 @@ public class AvaliacionAlunoController{
 	}
 	
 	
+	@GetMapping("/avaliacions/todas/{codigo}")
+	@CrossOrigin
+	public ResponseEntity<List<AvaliandoALuno>> todasporuser(@PathVariable UserSistema codigo) {
+
+		
+	    Optional<List<AvaliandoALuno>> AvalindoUno = Optional.ofNullable(Aar.findByIdavalicacionAndAlunotudos(codigo));
+
+	    if (AvalindoUno.isPresent()) {
+	        return ResponseEntity.ok(AvalindoUno.get());
+	    } else {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	    }
+
+	}
+	
+	
 
 	@PostMapping("/avaliacions")
     @CrossOrigin
