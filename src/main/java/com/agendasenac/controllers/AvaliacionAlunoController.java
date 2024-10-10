@@ -68,7 +68,7 @@ public class AvaliacionAlunoController{
 	
 	@GetMapping("/avaliacions/todas/{codigo}")
 	@CrossOrigin
-	public ResponseEntity<List<AvaliandoALuno>> todasporuser(@PathVariable UserSistema codigo) {
+	public ResponseEntity<List<AvaliandoALuno>> todasporuser(@PathVariable Long codigo) {
 
 		
 	    Optional<List<AvaliandoALuno>> AvalindoUno = Optional.ofNullable(Aar.findByIdavalicacionAndAlunotudos(codigo));
