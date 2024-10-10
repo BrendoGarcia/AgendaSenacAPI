@@ -50,7 +50,7 @@ public class AvaliacionAlunoController{
 	@CrossOrigin
 	public ResponseEntity<List<AvaliandoALuno>> getAvaliacoesPorAluno(@PathVariable Long codigo) {
 
-	    List<AvaliandoALuno> avaliacoes = Aar.findByAluno_Id(codigo);
+	    List<AvaliandoALuno> avaliacoes = Aar.findByAluno_Codigo(codigo);
 
 	    if (!avaliacoes.isEmpty()) {
 	        return ResponseEntity.ok(avaliacoes);

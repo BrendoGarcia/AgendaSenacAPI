@@ -15,6 +15,6 @@ public interface AvaliacionALunoRepository extends CrudRepository<AvaliandoALuno
 	AvaliandoALuno findByidavalicacion(Long idavalicacion);
 	
 	List<AvaliandoALuno> findByIdavalicacionAndAluno(Long idavalicacion, UserSistema aluno);
-	List<AvaliandoALuno> findByAluno_Id(Long codigo);
+	List<AvaliandoALuno> findByAluno_Codigo(Long codigo);
 
 	}
