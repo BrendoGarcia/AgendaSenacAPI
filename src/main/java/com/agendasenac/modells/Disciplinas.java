@@ -1,100 +1,94 @@
 package com.agendasenac.modells;
 
 import java.io.Serializable;
+import jakarta.persistence.*;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
- 
 @Entity
 @Table(name = "Disciplinas")
-public class Disciplinas implements Serializable{
-	private static final long serialVesionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	@Column(name = "idDisciplina")
-	private Long idDisciplina;
-	
-	@Column(name = "NomeDaDisciplina")
-	private String NomeDaDisciplina;
-	
-	@Column(name = "DetalhesAdicionais")
-	private String DetalhesAdicionais;
+public class Disciplinas implements Serializable {
+    
+    private static final long serialVersionUID = 1L;  // Corrigido o nome da variável
 
-	@Column(name = "CargaHoraria")
-	private String cargaHoraria;
-	
-	
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "idDisciplina")
+    private Long idDisciplina;
 
-	@ManyToOne(optional = true)
-	private UserSistema professor;
-	
+    @Column(name = "NomeDaDisciplina")
+    private String nomeDaDisciplina;
 
-	@ManyToOne
-	private Curso curso;
-	
-	
-	public String getnomeprofessor() {
-        return professor != null ? professor.getNomeCompletoUser() : "SEM NOME"; ///pq tu não quer irrr
+    @Column(name = "DetalhesAdicionais")
+    private String detalhesAdicionais;
+
+    @Column(name = "CargaHoraria")
+    private String cargaHoraria;
+
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "professor_id")  // Adicionando nome de coluna explicitamente
+    private UserSistema professor;
+
+    @ManyToOne
+    @JoinColumn(name = "curso_id")  // Adicionando nome de coluna explicitamente
+    private Curso curso;
+
+    // Getters e setters com nomes corrigidos
+    public String getNomeProfessor() {
+        return professor != null ? professor.getNomeCompletoUser() : "SEM NOME";
     }
 
-    public String getcontatoprofessor() {
+    public String getContatoProfessor() {
         return professor != null ? professor.getContatopessoal() : "SEM CONTATO";
     }
-    
-    public Long getprovessorid() {
-    	return professor != null ? professor.getCodigo() : null;
+
+    public Long getProfessorId() {
+        return professor != null ? professor.getCodigo() : null;
     }
-	
-  
 
-	public void setTurma(Curso curso) {
-		this.curso = curso;
-	}
-	
-	public void setProfessor(UserSistema professor) {
-		this.professor = professor;
-	}
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
 
-	public void setIdDisciplina(Long idDisciplina) {
-		this.idDisciplina = idDisciplina;
-	}
+    public void setProfessor(UserSistema professor) {
+        this.professor = professor;
+    }
 
-	public void setCargaHoraria(String cargaHoraria) {
-		this.cargaHoraria = cargaHoraria;
-	}
+    public void setIdDisciplina1(Long idDisciplina) {
+        this.idDisciplina = idDisciplina;
+    }
 
-	public String getCargaHoraria(){
-		return cargaHoraria;
-	}
+    public void setCargaHoraria1(String cargaHoraria) {
+        this.cargaHoraria = cargaHoraria;
+    }
 
-	public void setCargaHoraia(String cargaHoraria){
-		this.cargaHoraria = cargaHoraria;
-	}
-	
-	public long getIdDisciplina() {
-		return idDisciplina;
-	}
-	public void setIdDisciplina(long idDisciplina) {
-		this.idDisciplina = idDisciplina;
-	}
-	public String getNomeDaDisciplina() {
-		return NomeDaDisciplina;
-	}
-	public void setNomeDaDisciplina(String nomeDaDisciplina) {
-		NomeDaDisciplina = nomeDaDisciplina;
-	}
-	public String getDetalhesAdicionais() {
-		return DetalhesAdicionais;
-	}
-	public void setDetalhesAdicionais(String detalhesAdicionais) {
-		DetalhesAdicionais = detalhesAdicionais;
-	}
+    public String getCargaHoraria() {
+        return cargaHoraria;
+    }
 
+    public void setCargaHoraria(String cargaHoraria) {
+        this.cargaHoraria = cargaHoraria;
+    }
+
+    public Long getIdDisciplina() {
+        return idDisciplina;
+    }
+
+    public void setIdDisciplina(Long idDisciplina) {
+        this.idDisciplina = idDisciplina;
+    }
+
+    public String getNomeDaDisciplina() {
+        return nomeDaDisciplina;
+    }
+
+    public void setNomeDaDisciplina(String nomeDaDisciplina) {
+        this.nomeDaDisciplina = nomeDaDisciplina;
+    }
+
+    public String getDetalhesAdicionais() {
+        return detalhesAdicionais;
+    }
+
+    public void setDetalhesAdicionais(String detalhesAdicionais) {
+        this.detalhesAdicionais = detalhesAdicionais;
+    }
 }
