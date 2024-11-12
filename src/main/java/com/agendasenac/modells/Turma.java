@@ -40,9 +40,6 @@ public class Turma{
 	@ManyToOne(optional = true)
 	private Curso curso;
 	
-	@ManyToOne(optional = true)
-	private Disciplinas disciplinas;
-	
 	@JsonIgnore
 	@OneToOne(optional = true)
 	private UserSistema repesentante;  //Representant
@@ -69,10 +66,6 @@ public class Turma{
 	
 	public Curso getCurso() {
 		return curso;
-	}
-	
-	public Disciplinas getDisciplinas() {
-		return disciplinas;
 	}
 	
 	public void setCurso(Curso curso) {  

@@ -2,13 +2,12 @@ package com.agendasenac.modells;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
  
@@ -37,24 +36,9 @@ public class Disciplinas implements Serializable{
 	private UserSistema professor;
 	
 
-	@ManyToOne(optional = true)
-	private Turma turma;
+	@ManyToMany
+	private Curso curso;
 	
-	public String getnomeTurma() {
-        return turma != null ? turma.getNomeTurma() : "SEM NOME"; ///pq tu não quer irrr
-    }
-	
-	public Curso getCurso() {
-        return turma != null ? turma.getCurso() : null; ///pq tu não quer irrr
-    }
-	
-	public String getano() {
-        return turma != null ? turma.getAnno() : "SEM Ano"; ///pq tu não quer irrr
-    }
-	
-	public Long getidturma() {
-        return turma != null ? turma.getIdturma() : null; ///pq tu não quer irrr
-    }
 	
 	public String getnomeprofessor() {
         return professor != null ? professor.getNomeCompletoUser() : "SEM NOME"; ///pq tu não quer irrr
@@ -70,8 +54,8 @@ public class Disciplinas implements Serializable{
 	
   
 
-	public void setTurma(Turma turma) {
-		this.turma = turma;
+	public void setTurma(Curso curso) {
+		this.curso = curso;
 	}
 	
 	public void setProfessor(UserSistema professor) {
