@@ -64,12 +64,13 @@ public class Disciplinas implements Serializable{
     	return professor != null ? professor.getCodigo() : null;
     }
 	
-  
 
-	public void setTurma(Turma turma) {
-		this.turma = turma;
+
+	public void setCurso(Curso curso) {
+		this.curso = curso;
 	}
-	
+
+
 	public void setProfessor(UserSistema professor) {
 		this.professor = professor;
 	}
