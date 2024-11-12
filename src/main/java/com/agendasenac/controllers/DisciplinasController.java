@@ -43,7 +43,7 @@ public class DisciplinasController {
 	@GetMapping("/disciplinas/{idDisciplina}")
 	@CrossOrigin
 	public ResponseEntity<Disciplinas> RetornandoUmadiciplina(@PathVariable Long idDisciplina){
-		Optional<Disciplinas> disiciplias = Optional.ofNullable(dr.findByidDisciplina(idDisciplina));
+		Optional<Disciplinas> disiciplias = Optional.ofNullable(dr.findByIdDisciplina(idDisciplina));
 		
 		if (disiciplias.isPresent()) {
 	        return ResponseEntity.ok(disiciplias.get());
