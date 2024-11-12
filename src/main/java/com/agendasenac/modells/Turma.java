@@ -71,15 +71,11 @@ public class Turma{
 		return curso;
 	}
 	
-	public String getNomeDisciplinas() {
-		return disciplinas != null ? disciplinas.getNomeDaDisciplina() : "SEM NOME";
-	} 
-	
-	public Long getIdDisciplina() {
-		return disciplinas != null ? disciplinas.getIdDisciplina() : null;
+	public Disciplinas getDisciplinas() {
+		return disciplinas;
 	}
 	
-	public void setCurso(Curso curso) {
+	public void setCurso(Curso curso) {  
 		this.curso = curso;
 	}
 	
