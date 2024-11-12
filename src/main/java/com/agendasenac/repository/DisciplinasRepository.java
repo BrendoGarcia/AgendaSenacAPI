@@ -11,6 +11,7 @@ import com.agendasenac.modells.Disciplinas;
 public interface DisciplinasRepository extends CrudRepository<Disciplinas, Long>{
 			Disciplinas findByidDisciplina(Long idDisciplina);
 			List<Disciplinas> findByProfessorCodigo(Long codigo);
+			List<Disciplinas> findByAlunoCodigo(Long codigo);
 			@Query("SELECT d FROM Disciplinas d WHERE d.professor.codigo = :codigo AND d.turma.idturma = :idturma")
 		    List<Disciplinas> findByProfessorCodigoTurma(@Param("codigo") Long codigo, @Param("idturma") Long idturma);
 			
