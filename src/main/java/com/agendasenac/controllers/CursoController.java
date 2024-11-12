@@ -24,7 +24,7 @@ public class CursoController {
 	}
 	
 	@PostMapping("/cursos")
-	@CrossOrigin(origins = "*") 
+	@CrossOrigin 
 	public ResponseEntity<String> cadastrocurso(@RequestBody Curso curso) {
 	        cr.save(curso);
 	        return ResponseEntity.status(HttpStatus.CREATED).body("Curso cadastrado com sucesso");
