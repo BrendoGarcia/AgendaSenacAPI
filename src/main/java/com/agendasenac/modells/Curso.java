@@ -29,16 +29,13 @@ public class Curso implements Serializable{
 	private String datalhescurso;
 	
 	@ManyToMany
-	private Disciplinas disciplinas;
+	private List<Disciplinas> disciplinas;
 	
-	
-
-
-	public Disciplinas getDisciplinas() {
+	public List<Disciplinas> getDisciplinas() {
 		return disciplinas;
 	}
 
-	public void setDisciplinas(Disciplinas disciplinas) {
+	public void setDisciplinas(List<Disciplinas> disciplinas) {
 		this.disciplinas = disciplinas;
 	}
 

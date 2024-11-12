@@ -36,7 +36,7 @@ public class Disciplinas implements Serializable{
 	private UserSistema professor;
 	
 
-	@ManyToMany
+	@ManyToOne
 	private Curso curso;
 	
 	
