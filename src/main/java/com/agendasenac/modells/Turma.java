@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -39,6 +40,9 @@ public class Turma{
 	@ManyToOne(optional = true)
 	private Curso curso;
 	
+	@ManyToOne(optional = true)
+	private Disciplinas disciplinas;
+	
 	@JsonIgnore
 	@OneToOne(optional = true)
 	private UserSistema repesentante;  //Representant
@@ -66,6 +70,15 @@ public class Turma{
 	public Curso getCurso() {
 		return curso;
 	}
+	
+	public String getNomeDisciplinas() {
+		return disciplinas != null ? disciplinas.getNomeDaDisciplina() : "SEM NOME";
+	} 
+	
+	public Long getIdDisciplina() {
+		return disciplinas != null ? disciplinas.getIdDisciplina() : null;
+	}
+	
 	public void setCurso(Curso curso) {
 		this.curso = curso;
 	}
