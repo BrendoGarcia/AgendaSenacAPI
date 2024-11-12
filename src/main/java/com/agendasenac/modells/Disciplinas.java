@@ -40,7 +40,7 @@ public class Disciplinas implements Serializable{
 	@ManyToOne(optional = true)
 	private Curso curso;
 	
-	public String getnomeCurso() {
+	public String getnomeCurso() { 
         return curso != null ? curso.getNomecurso() : "SEM NOME"; ///pq tu não quer irrr
     }
 	
