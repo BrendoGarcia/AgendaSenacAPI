@@ -38,22 +38,18 @@ public class Disciplinas implements Serializable{
 	
 
 	@ManyToOne(optional = true)
-	private Turma turma;
+	private Curso curso;
 	
-	public String getnomeTurma() {
-        return turma != null ? turma.getNomeTurma() : "SEM NOME"; ///pq tu não quer irrr
+	public String getnomeCurso() {
+        return curso != null ? curso.getNomecurso() : "SEM NOME"; ///pq tu não quer irrr
     }
 	
-	public Curso getCurso() {
-        return turma != null ? turma.getCurso() : null; ///pq tu não quer irrr
+	public String getdetalhes() {
+        return curso != null ? curso.getDatalhescurso() : "Detalhes Ano"; ///pq tu não quer irrr
     }
 	
-	public String getano() {
-        return turma != null ? turma.getAnno() : "SEM Ano"; ///pq tu não quer irrr
-    }
-	
-	public Long getidturma() {
-        return turma != null ? turma.getIdturma() : null; ///pq tu não quer irrr
+	public Long getidcurso() {
+        return curso != null ? curso.getIdcursos() : null; ///pq tu não quer irrr
     }
 	
 	public String getnomeprofessor() {
@@ -69,8 +65,6 @@ public class Disciplinas implements Serializable{
     }
 	
   
-
-	
 
 	public void setTurma(Turma turma) {
 		this.turma = turma;
