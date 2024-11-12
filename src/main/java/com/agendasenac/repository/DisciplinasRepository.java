@@ -13,8 +13,6 @@ public interface DisciplinasRepository extends JpaRepository<Disciplinas, Long> 
     Disciplinas findByIdDisciplina(Long idDisciplina);
     
     List<Disciplinas> findByProfessorCodigo(Long codigo);
-    
-    List<Disciplinas> findByAlunoCodigo(Long codigo);
 
     // Consulta corrigida, considerando o relacionamento correto
     @Query("SELECT d FROM Disciplinas d WHERE d.professor.codigo = :codigo AND d.curso.idCurso = :idCurso")
