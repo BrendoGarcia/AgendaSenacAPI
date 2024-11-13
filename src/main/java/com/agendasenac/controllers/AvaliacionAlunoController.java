@@ -41,34 +41,28 @@ public class AvaliacionAlunoController {
     @GetMapping
     public ResponseEntity<Map<String, Object>> listarAvaliacoes() {
         List<AvaliandoALuno> avaliacoes = (List<AvaliandoALuno>) Aar.findAll();
+        if (avaliacoes.isEmpty()) {
+            return createResponse(HttpStatus.NOT_FOUND, "Nenhuma avaliação encontrada", null);
+        }
         return createResponse(HttpStatus.OK, "Avaliações encontradas", avaliacoes);
     }
 
     @GetMapping("/todas/{codigo}")
     public ResponseEntity<Map<String, Object>> getAvaliacoesPorAluno(@PathVariable Long codigo) {
-        try {
-            List<AvaliandoALuno> avaliacoes = Aar.findByAluno_Codigo(codigo);
-            if (avaliacoes.isEmpty()) {
-                return createResponse(HttpStatus.NOT_FOUND, "Nenhuma avaliação encontrada para este aluno", null);
-            }
-            return createResponse(HttpStatus.OK, "Avaliações encontradas", avaliacoes);
-        } catch (Exception e) {
-            return createResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao buscar avaliações", e.getMessage());
+        List<AvaliandoALuno> avaliacoes = Aar.findByAluno_Codigo(codigo);
+        if (avaliacoes.isEmpty()) {
+            return createResponse(HttpStatus.NOT_FOUND, "Nenhuma avaliação encontrada para este aluno", null);
         }
+        return createResponse(HttpStatus.OK, "Avaliações encontradas", avaliacoes);
     }
 
     @GetMapping("/{idavalicacion}/{codigo}")
     public ResponseEntity<Map<String, Object>> ReceberAvaliacaoPorUser(@PathVariable Long idavalicacion, UserSistema codigo) {
-        try {
-            Optional<List<AvaliandoALuno>> AvalindoUno = Optional.ofNullable(Aar.findByIdavalicacionAndAluno(idavalicacion, codigo));
-            if (AvalindoUno.isPresent()) {
-                return createResponse(HttpStatus.OK, "Avaliação encontrada", AvalindoUno.get());
-            } else {
-                return createResponse(HttpStatus.NOT_FOUND, "Avaliação não encontrada", null);
-            }
-        } catch (Exception e) {
-            return createResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao buscar a avaliação", e.getMessage());
+        Optional<List<AvaliandoALuno>> AvalindoUno = Optional.ofNullable(Aar.findByIdavalicacionAndAluno(idavalicacion, codigo));
+        if (AvalindoUno.isEmpty() || AvalindoUno.get().isEmpty()) {
+            return createResponse(HttpStatus.NOT_FOUND, "Avaliação não encontrada para o aluno especificado", null);
         }
+        return createResponse(HttpStatus.OK, "Avaliação encontrada", AvalindoUno.get());
     }
 
     @PostMapping
