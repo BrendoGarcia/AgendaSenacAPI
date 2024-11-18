@@ -1,7 +1,9 @@
 package com.agendasenac.controllers;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -11,7 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.agendasenac.modells.Curso;
+import com.agendasenac.modells.Disciplinas;
 import com.agendasenac.repository.CursoRepository;
+import com.agendasenac.repository.DisciplinasRepository;
 
 @RestController
 @RequestMapping("/cursos")
@@ -20,6 +24,9 @@ public class CursoController {
 
     @Autowired
     private CursoRepository cr;
+    
+    @Autowired
+    private DisciplinasRepository dr;
 
     // Método para criar uma resposta padronizada
     private ResponseEntity<Map<String, Object>> createResponse(HttpStatus status, String message, Object data) {
@@ -57,7 +64,10 @@ public class CursoController {
 
     // Atualizar curso
     @PutMapping("/{idCurso}")
-    public ResponseEntity<Map<String, Object>> atualizarCurso(@PathVariable Long idCurso, @RequestBody Map<String, Object> updates) {
+    public ResponseEntity<Map<String, Object>> atualizarCurso(
+            @PathVariable Long idCurso, 
+            @RequestBody Map<String, Object> updates) {
+
         Optional<Curso> optionalCurso = Optional.ofNullable(cr.findByidCurso(idCurso));
         if (!optionalCurso.isPresent()) {
             return createResponse(HttpStatus.NOT_FOUND, "Curso não encontrado", null);
@@ -68,22 +78,41 @@ public class CursoController {
 
         updates.forEach((key, value) -> {
             try {
-                Field field = Curso.class.getDeclaredField(key);
-                field.setAccessible(true);
+                if ("disciplinas".equals(key)) {
+                    // Tratamento especial para a lista de disciplinas
+                    List<Map<String, Object>> disciplinasList = (List<Map<String, Object>>) value;
+                    List<Disciplinas> novasDisciplinas = new ArrayList<>();
 
-                if ("nomeCurso".equals(key)) {
-                    if (value == null || ((String) value).trim().isEmpty()) {
-                        errors.put(key, "O nome do curso é obrigatório e não pode estar vazio.");
+                    for (Map<String, Object> disciplinaMap : disciplinasList) {
+                        Long idDisciplina = Long.valueOf(disciplinaMap.get("idDisciplina").toString());
+                        Disciplinas disciplina = dr.findById(idDisciplina)
+                            .orElseThrow(() -> new RuntimeException("Disciplina não encontrada: " + idDisciplina));
+                        
+                        disciplina.setCurso(curso); // Define o curso para a disciplina
+                        novasDisciplinas.add(disciplina);
                     }
-                }
 
-                if ("detalhesCurso".equals(key)) {
-                    if (value != null && ((String) value).length() < 5) {
-                        errors.put(key, "Os detalhes do curso devem ter no mínimo 5 caracteres.");
+                    curso.setDisciplinas(novasDisciplinas);
+                } else {
+                    // Atualização dos campos simples
+                    Field field = Curso.class.getDeclaredField(key);
+                    field.setAccessible(true);
+
+                    // Validações específicas
+                    if ("nomeCurso".equals(key)) {
+                        if (value == null || ((String) value).trim().isEmpty()) {
+                            errors.put(key, "O nome do curso é obrigatório e não pode estar vazio.");
+                        }
                     }
-                }
 
-                field.set(curso, value);
+                    if ("detalhesCurso".equals(key)) {
+                        if (value != null && ((String) value).length() < 5) {
+                            errors.put(key, "Os detalhes do curso devem ter no mínimo 5 caracteres.");
+                        }
+                    }
+
+                    field.set(curso, value);
+                }
             } catch (NoSuchFieldException e) {
                 errors.put(key, "Campo não encontrado: " + key);
             } catch (IllegalAccessException e) {
@@ -104,6 +133,7 @@ public class CursoController {
             return createResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao atualizar o curso", e.getMessage());
         }
     }
+
 
     // Método de validação do curso
     private Map<String, String> validarCurso(Curso curso) {
