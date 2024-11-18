@@ -52,14 +52,6 @@ public class Disciplinas implements Serializable {
         this.professor = professor;
     }
 
-    public void setIdDisciplina1(Long idDisciplina) {
-        this.idDisciplina = idDisciplina;
-    }
-
-    public void setCargaHoraria1(String cargaHoraria) {
-        this.cargaHoraria = cargaHoraria;
-    }
-
     public String getCargaHoraria() {
         return cargaHoraria;
     }
