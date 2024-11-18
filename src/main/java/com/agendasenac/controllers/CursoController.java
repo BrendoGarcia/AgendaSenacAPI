@@ -84,15 +84,31 @@ public class CursoController {
                     List<Disciplinas> novasDisciplinas = new ArrayList<>();
 
                     for (Map<String, Object> disciplinaMap : disciplinasList) {
-                        Long idDisciplina = Long.valueOf(disciplinaMap.get("idDisciplina").toString());
-                        Disciplinas disciplina = dr.findById(idDisciplina)
-                            .orElseThrow(() -> new RuntimeException("Disciplina não encontrada: " + idDisciplina));
-                        
-                        disciplina.setCurso(curso); // Define o curso para a disciplina
-                        novasDisciplinas.add(disciplina);
+                        try {
+                            // Verificação do campo idDisciplina
+                            if (!disciplinaMap.containsKey("idDisciplina")) {
+                                errors.put("disciplinas", "Campo 'idDisciplina' não encontrado na lista de disciplinas.");
+                                continue;
+                            }
+
+                            Long idDisciplina = Long.valueOf(disciplinaMap.get("idDisciplina").toString());
+
+                            // Verificar se a disciplina existe no banco de dados
+                            Disciplinas disciplina = dr.findById(idDisciplina)
+                                .orElseThrow(() -> new IllegalArgumentException("Disciplina não encontrada: " + idDisciplina));
+
+                            disciplina.setCurso(curso); // Define o curso para a disciplina
+                            novasDisciplinas.add(disciplina);
+                        } catch (NumberFormatException e) {
+                            errors.put("idDisciplina", "O ID da disciplina deve ser um número válido.");
+                        } catch (IllegalArgumentException e) {
+                            errors.put("disciplinas", e.getMessage()); // Captura a mensagem de disciplina não encontrada
+                        }
                     }
 
+                    // Adiciona a lista de disciplinas atualizadas ao curso
                     curso.setDisciplinas(novasDisciplinas);
+
                 } else {
                     // Atualização dos campos simples
                     Field field = Curso.class.getDeclaredField(key);
@@ -111,6 +127,7 @@ public class CursoController {
                         }
                     }
 
+                    // Atualiza o campo
                     field.set(curso, value);
                 }
             } catch (NoSuchFieldException e) {
@@ -122,10 +139,12 @@ public class CursoController {
             }
         });
 
+        // Retorna erros, se houver
         if (!errors.isEmpty()) {
             return createResponse(HttpStatus.BAD_REQUEST, "Erro na validação dos campos", errors);
         }
 
+        // Tenta salvar o curso atualizado
         try {
             cr.save(curso);
             return createResponse(HttpStatus.OK, "Curso atualizado com sucesso", curso);
@@ -133,6 +152,7 @@ public class CursoController {
             return createResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao atualizar o curso", e.getMessage());
         }
     }
+
 
 
     // Método de validação do curso
